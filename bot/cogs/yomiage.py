@@ -205,6 +205,27 @@ class YomiageCog(commands.Cog):
         speaker_id = self._get_speaker(message.guild.id)
         await self._queue.put((vc, text, speaker_id))
 
+    @commands.Cog.listener()
+    async def on_voice_state_update(
+        self,
+        member: discord.Member,
+        before: discord.VoiceState,
+        after: discord.VoiceState,
+    ):
+        if member.bot:
+            return
+
+        vc = member.guild.voice_client
+        if not vc or not vc.is_connected():
+            return
+
+        # Bot以外が誰もいなくなったら自動退出
+        members = [m for m in vc.channel.members if not m.bot]
+        if not members:
+            self._active_channels.pop(member.guild.id, None)
+            await vc.disconnect()
+            logger.info("Auto-disconnected from %s (no members left)", vc.channel.name)
+
 
 async def setup(bot: commands.Bot, voicevox: VoicevoxClient, default_speaker: int):
     await bot.add_cog(YomiageCog(bot, voicevox, default_speaker))
