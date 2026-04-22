@@ -1,0 +1,16 @@
+services:
+  voicevox-engine:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports:
+      - "50021:50021"
+    restart: unless-stopped
+
+  bot:
+    build: .
+    depends_on:
+      - voicevox-engine
+    env_file:
+      - .env
+    environment:
+      - VOICEVOX_HOST=http://voicevox-engine:50021
+    restart: unless-stopped
