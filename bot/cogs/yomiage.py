@@ -119,18 +119,27 @@ class YomiageCog(commands.Cog):
             )
             return
 
+        await interaction.response.defer()
+
         voice_channel = interaction.user.voice.channel
 
-        if interaction.guild.voice_client:
-            await interaction.guild.voice_client.move_to(voice_channel)
-        else:
-            await voice_channel.connect()
+        try:
+            if interaction.guild.voice_client:
+                await interaction.guild.voice_client.move_to(voice_channel)
+            else:
+                await voice_channel.connect(timeout=30, self_deaf=True)
 
-        self._active_channels[interaction.guild_id] = interaction.channel_id
+            self._active_channels[interaction.guild_id] = interaction.channel_id
 
-        await interaction.response.send_message(
-            f"🔊 {voice_channel.name} に参加しました！このチャンネルのメッセージを読み上げます。"
-        )
+            await interaction.followup.send(
+                f"🔊 {voice_channel.name} に参加しました！このチャンネルのメッセージを読み上げます。"
+            )
+        except Exception:
+            logger.exception("Failed to join voice channel")
+            await interaction.followup.send(
+                "音声チャンネルへの接続に失敗しました。もう一度試してください。",
+                ephemeral=True,
+            )
 
     @app_commands.command(name="yo_leave", description="音声チャンネルから退出します")
     async def yo_leave(self, interaction: discord.Interaction):
@@ -141,9 +150,10 @@ class YomiageCog(commands.Cog):
             )
             return
 
+        await interaction.response.defer()
         self._active_channels.pop(interaction.guild_id, None)
         await vc.disconnect()
-        await interaction.response.send_message("👋 退出しました。")
+        await interaction.followup.send("👋 退出しました。")
 
     @app_commands.command(name="yo_voice", description="読み上げボイスを変更します")
     @app_commands.describe(speaker_id="VOICEVOXのspeaker ID（例: 3=ずんだもん）")
