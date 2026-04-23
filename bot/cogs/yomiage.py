@@ -95,9 +95,6 @@ class YomiageCog(commands.Cog):
             self._player_task.cancel()
         await self.voicevox.close()
 
-    def _reset_guild_voices(self, guild_id: int):
-        self._user_speakers.pop(guild_id, None)
-
     async def _player_loop(self):
         while True:
             vc, text, speaker_id = await self._queue.get()
@@ -139,7 +136,7 @@ class YomiageCog(commands.Cog):
                 await voice_channel.connect(timeout=30, self_deaf=True)
 
             self._active_channels[interaction.guild_id] = interaction.channel_id
-            self._reset_guild_voices(interaction.guild_id)
+
 
             await interaction.followup.send(
                 f"🔊 {voice_channel.name} に参加しました！このチャンネルのメッセージを読み上げます。"
@@ -162,7 +159,6 @@ class YomiageCog(commands.Cog):
 
         await interaction.response.defer()
         self._active_channels.pop(interaction.guild_id, None)
-        self._reset_guild_voices(interaction.guild_id)
         await vc.disconnect()
         await interaction.followup.send("👋 退出しました。")
 
@@ -297,7 +293,6 @@ class YomiageCog(commands.Cog):
         members = [m for m in vc.channel.members if not m.bot]
         if not members:
             self._active_channels.pop(member.guild.id, None)
-            self._reset_guild_voices(member.guild.id)
             await vc.disconnect()
             logger.info("Auto-disconnected from %s (no members left)", vc.channel.name)
 
