@@ -28,11 +28,12 @@ voicevox = VoicevoxClient(host=VOICEVOX_HOST)
 @bot.event
 async def on_ready():
     await setup_yomiage(bot, voicevox, DEFAULT_SPEAKER_ID)
-    synced = await bot.tree.sync()
+    bot.tree.clear_commands(guild=None)
+    await bot.tree.sync()
     for guild in bot.guilds:
         bot.tree.copy_global_to(guild=guild)
         await bot.tree.sync(guild=guild)
-    logger.info("Bot ready as %s — synced %d commands (global + %d guilds)", bot.user, len(synced), len(bot.guilds))
+    logger.info("Bot ready as %s — synced commands to %d guilds", bot.user, len(bot.guilds))
 
 
 def main():
