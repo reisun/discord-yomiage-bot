@@ -128,15 +128,18 @@ class YomiageCog(commands.Cog):
 
     @app_commands.command(name="yo_join", description="音声チャンネルに参加して読み上げを開始します")
     async def yo_join(self, interaction: discord.Interaction):
-        if not interaction.user.voice or not interaction.user.voice.channel:
+        if isinstance(interaction.channel, discord.VoiceChannel):
+            voice_channel = interaction.channel
+        elif interaction.user.voice and interaction.user.voice.channel:
+            voice_channel = interaction.user.voice.channel
+        else:
             await interaction.response.send_message(
-                "先に音声チャンネルに参加してください！", ephemeral=True
+                "音声チャンネルのチャットから実行するか、音声チャンネルに参加してください！",
+                ephemeral=True,
             )
             return
 
         await interaction.response.defer()
-
-        voice_channel = interaction.user.voice.channel
 
         try:
             if interaction.guild.voice_client:
