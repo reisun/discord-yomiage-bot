@@ -77,6 +77,12 @@ class YomiageCog(commands.Cog):
         self._queue: asyncio.Queue[tuple[discord.VoiceClient, str, int]] = asyncio.Queue()
         self._player_task: asyncio.Task | None = None
         self._active_channels: dict[int, int] = {}
+        self._speakers_cache: list[dict] | None = None
+
+    async def _fetch_speakers(self) -> list[dict]:
+        if self._speakers_cache is None:
+            self._speakers_cache = await self.voicevox.get_speakers()
+        return self._speakers_cache
 
     async def cog_load(self):
         self._player_task = asyncio.create_task(self._player_loop())
@@ -156,22 +162,84 @@ class YomiageCog(commands.Cog):
         await interaction.followup.send("👋 退出しました。")
 
     @app_commands.command(name="yo_voice", description="読み上げボイスを変更します")
-    @app_commands.describe(speaker_id="VOICEVOXのspeaker ID（例: 3=ずんだもん）")
-    async def yo_voice(self, interaction: discord.Interaction, speaker_id: int):
-        self._guild_speakers[interaction.guild_id] = speaker_id
+    @app_commands.describe(voice="ボイス名", style="話し方")
+    async def yo_voice(self, interaction: discord.Interaction, voice: str, style: str):
+        try:
+            speakers = await self._fetch_speakers()
+        except Exception:
+            await interaction.response.send_message(
+                "ボイス情報の取得に失敗しました。", ephemeral=True
+            )
+            return
+
+        for sp in speakers:
+            if sp["name"] == voice:
+                for st in sp.get("styles", []):
+                    if st["name"] == style:
+                        self._guild_speakers[interaction.guild_id] = st["id"]
+                        await interaction.response.send_message(
+                            f"🎤 読み上げボイスを **{voice}**（{style}）に変更しました。"
+                        )
+                        return
+
         await interaction.response.send_message(
-            f"🎤 読み上げボイスを speaker_id={speaker_id} に変更しました。"
+            f"「{voice}」の「{style}」が見つかりませんでした。", ephemeral=True
         )
+
+    @yo_voice.autocomplete("voice")
+    async def _voice_autocomplete(
+        self, interaction: discord.Interaction, current: str
+    ) -> list[app_commands.Choice[str]]:
+        try:
+            speakers = await self._fetch_speakers()
+        except Exception:
+            return []
+        names: list[str] = []
+        seen: set[str] = set()
+        for sp in speakers:
+            if sp["name"] not in seen:
+                seen.add(sp["name"])
+                names.append(sp["name"])
+        if current:
+            names = [n for n in names if current.lower() in n.lower()]
+        return [app_commands.Choice(name=n, value=n) for n in names[:25]]
+
+    @yo_voice.autocomplete("style")
+    async def _style_autocomplete(
+        self, interaction: discord.Interaction, current: str
+    ) -> list[app_commands.Choice[str]]:
+        try:
+            speakers = await self._fetch_speakers()
+        except Exception:
+            return []
+        voice_value = interaction.namespace.voice
+        styles: list[str] = []
+        if voice_value:
+            for sp in speakers:
+                if sp["name"] == voice_value:
+                    styles = [st["name"] for st in sp.get("styles", [])]
+                    break
+        else:
+            seen: set[str] = set()
+            for sp in speakers:
+                for st in sp.get("styles", []):
+                    if st["name"] not in seen:
+                        seen.add(st["name"])
+                        styles.append(st["name"])
+        if current:
+            styles = [s for s in styles if current.lower() in s.lower()]
+        return [app_commands.Choice(name=s, value=s) for s in styles[:25]]
 
     @app_commands.command(name="yo_speakers", description="利用可能なボイス一覧を表示します")
     async def yo_speakers(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
         try:
-            speakers = await self.voicevox.get_speakers()
+            speakers = await self._fetch_speakers()
             lines = []
             for sp in speakers:
-                for style in sp.get("styles", []):
-                    lines.append(f"**{sp['name']}** ({style['name']}) — ID: `{style['id']}`")
+                styles = sp.get("styles", [])
+                style_names = "、".join(st["name"] for st in styles)
+                lines.append(f"🎤 **{sp['name']}**\n　　話し方: {style_names}")
             text = "\n".join(lines[:50])
             if len(lines) > 50:
                 text += f"\n...他 {len(lines) - 50} 件"
