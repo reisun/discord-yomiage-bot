@@ -12,6 +12,7 @@
 - [x] /yo_voice オートコンプリート（ボイス名 + 話し方の選択式）
 - [x] /yo_speakers ボイス別グループ表示
 - [x] ギルド同期（即時反映）
+- [x] 英語→カタカナ変換（alkanaライブラリ）
 
 ### 今後の拡張候補
 - [ ] /yo_speakers にクレジット表記追加（`Powered by VOICEVOX`等）
