@@ -4,6 +4,7 @@ import re
 import tempfile
 from pathlib import Path
 
+import alkana
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -18,6 +19,13 @@ CUSTOM_EMOJI_PATTERN = re.compile(r"<a?:\w+:\d+>")
 SPOILER_PATTERN = re.compile(r"\|\|.+?\|\|")
 CODE_BLOCK_PATTERN = re.compile(r"```[\s\S]*?```")
 INLINE_CODE_PATTERN = re.compile(r"`[^`]+`")
+ENGLISH_WORD_PATTERN = re.compile(r"[a-zA-Z]+")
+
+
+def _english_to_kana(match: re.Match) -> str:
+    word = match.group(0)
+    kana = alkana.get_kana(word.lower())
+    return kana if kana else word
 
 
 def sanitize_text(text: str, guild: discord.Guild | None = None) -> str:
@@ -30,6 +38,8 @@ def sanitize_text(text: str, guild: discord.Guild | None = None) -> str:
     text = re.sub(r"<@!?(\d+)>", _replace_member_mention(guild), text)
     text = re.sub(r"<#(\d+)>", _replace_channel_mention(guild), text)
     text = re.sub(r"<@&(\d+)>", _replace_role_mention(guild), text)
+
+    text = ENGLISH_WORD_PATTERN.sub(_english_to_kana, text)
 
     text = text.strip()
     if len(text) > MAX_READ_LENGTH:
