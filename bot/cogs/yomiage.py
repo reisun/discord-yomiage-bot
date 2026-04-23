@@ -1,5 +1,4 @@
 import asyncio
-import io
 import logging
 import re
 import tempfile
@@ -73,7 +72,9 @@ class YomiageCog(commands.Cog):
         self.bot = bot
         self.voicevox = voicevox
         self.default_speaker = default_speaker
-        self._guild_speakers: dict[int, int] = {}
+        self._user_speakers: dict[int, dict[int, int]] = {}
+        self._guild_voice_index: dict[int, int] = {}
+        self._voice_rotation: list[int] | None = None
         self._queue: asyncio.Queue[tuple[discord.VoiceClient, str, int]] = asyncio.Queue()
         self._player_task: asyncio.Task | None = None
         self._active_channels: dict[int, int] = {}
@@ -84,6 +85,30 @@ class YomiageCog(commands.Cog):
             self._speakers_cache = await self.voicevox.get_speakers()
         return self._speakers_cache
 
+    async def _get_voice_rotation(self) -> list[int]:
+        if self._voice_rotation is not None:
+            return self._voice_rotation
+        speakers = await self._fetch_speakers()
+        style_ids: list[int] = []
+        for sp in speakers:
+            for st in sp.get("styles", []):
+                style_ids.append(st["id"])
+        if self.default_speaker in style_ids:
+            style_ids.remove(self.default_speaker)
+        self._voice_rotation = [self.default_speaker] + style_ids
+        return self._voice_rotation
+
+    async def _assign_speaker(self, guild_id: int, user_id: int) -> int:
+        guild_users = self._user_speakers.setdefault(guild_id, {})
+        if user_id in guild_users:
+            return guild_users[user_id]
+        rotation = await self._get_voice_rotation()
+        idx = self._guild_voice_index.get(guild_id, 0)
+        speaker_id = rotation[idx % len(rotation)]
+        guild_users[user_id] = speaker_id
+        self._guild_voice_index[guild_id] = idx + 1
+        return speaker_id
+
     async def cog_load(self):
         self._player_task = asyncio.create_task(self._player_loop())
 
@@ -92,8 +117,9 @@ class YomiageCog(commands.Cog):
             self._player_task.cancel()
         await self.voicevox.close()
 
-    def _get_speaker(self, guild_id: int) -> int:
-        return self._guild_speakers.get(guild_id, self.default_speaker)
+    def _reset_guild_voices(self, guild_id: int):
+        self._user_speakers.pop(guild_id, None)
+        self._guild_voice_index.pop(guild_id, None)
 
     async def _player_loop(self):
         while True:
@@ -136,6 +162,7 @@ class YomiageCog(commands.Cog):
                 await voice_channel.connect(timeout=30, self_deaf=True)
 
             self._active_channels[interaction.guild_id] = interaction.channel_id
+            self._reset_guild_voices(interaction.guild_id)
 
             await interaction.followup.send(
                 f"🔊 {voice_channel.name} に参加しました！このチャンネルのメッセージを読み上げます。"
@@ -158,10 +185,11 @@ class YomiageCog(commands.Cog):
 
         await interaction.response.defer()
         self._active_channels.pop(interaction.guild_id, None)
+        self._reset_guild_voices(interaction.guild_id)
         await vc.disconnect()
         await interaction.followup.send("👋 退出しました。")
 
-    @app_commands.command(name="yo_voice", description="読み上げボイスを変更します")
+    @app_commands.command(name="yo_voice", description="自分の読み上げボイスを変更します")
     @app_commands.describe(voice="ボイス名", style="話し方")
     async def yo_voice(self, interaction: discord.Interaction, voice: str, style: str):
         try:
@@ -176,9 +204,10 @@ class YomiageCog(commands.Cog):
             if sp["name"] == voice:
                 for st in sp.get("styles", []):
                     if st["name"] == style:
-                        self._guild_speakers[interaction.guild_id] = st["id"]
+                        guild_users = self._user_speakers.setdefault(interaction.guild_id, {})
+                        guild_users[interaction.user.id] = st["id"]
                         await interaction.response.send_message(
-                            f"🎤 読み上げボイスを **{voice}**（{style}）に変更しました。"
+                            f"🎤 {interaction.user.display_name} のボイスを **{voice}**（{style}）に変更しました。"
                         )
                         return
 
@@ -270,7 +299,7 @@ class YomiageCog(commands.Cog):
         if not text:
             return
 
-        speaker_id = self._get_speaker(message.guild.id)
+        speaker_id = await self._assign_speaker(message.guild.id, message.author.id)
         await self._queue.put((vc, text, speaker_id))
 
     @commands.Cog.listener()
@@ -291,6 +320,7 @@ class YomiageCog(commands.Cog):
         members = [m for m in vc.channel.members if not m.bot]
         if not members:
             self._active_channels.pop(member.guild.id, None)
+            self._reset_guild_voices(member.guild.id)
             await vc.disconnect()
             logger.info("Auto-disconnected from %s (no members left)", vc.channel.name)
 
