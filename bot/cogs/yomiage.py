@@ -19,13 +19,12 @@ CUSTOM_EMOJI_PATTERN = re.compile(r"<a?:\w+:\d+>")
 SPOILER_PATTERN = re.compile(r"\|\|.+?\|\|")
 CODE_BLOCK_PATTERN = re.compile(r"```[\s\S]*?```")
 INLINE_CODE_PATTERN = re.compile(r"`[^`]+`")
-ENGLISH_WORD_PATTERN = re.compile(r"[a-zA-Z]+")
+ENGLISH_PHRASE_PATTERN = re.compile(r"[a-zA-Z]+(?:\s+[a-zA-Z]+)*")
 
 
-def _english_to_kana(match: re.Match) -> str:
-    word = match.group(0)
-    kana = alkana.get_kana(word.lower())
-    return kana if kana else word
+def _english_phrase_to_kana(match: re.Match) -> str:
+    words = match.group(0).split()
+    return "".join(alkana.get_kana(w.lower()) or w for w in words)
 
 
 def sanitize_text(text: str, guild: discord.Guild | None = None) -> str:
@@ -39,7 +38,7 @@ def sanitize_text(text: str, guild: discord.Guild | None = None) -> str:
     text = re.sub(r"<#(\d+)>", _replace_channel_mention(guild), text)
     text = re.sub(r"<@&(\d+)>", _replace_role_mention(guild), text)
 
-    text = ENGLISH_WORD_PATTERN.sub(_english_to_kana, text)
+    text = ENGLISH_PHRASE_PATTERN.sub(_english_phrase_to_kana, text)
 
     text = text.strip()
     if len(text) > MAX_READ_LENGTH:
