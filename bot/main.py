@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 
 from bot.cogs.yomiage import setup as setup_yomiage
+from bot.llm.ollama import OllamaClient
 from bot.tts.voicevox import VoicevoxClient
 
 logging.basicConfig(
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
 VOICEVOX_HOST = os.environ.get("VOICEVOX_HOST", "http://voicevox-engine:50021")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://ollama:11434")
 DEFAULT_SPEAKER_ID = int(os.environ.get("DEFAULT_SPEAKER_ID", "3"))
 
 intents = discord.Intents.default()
@@ -23,11 +25,12 @@ intents.voice_states = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 voicevox = VoicevoxClient(host=VOICEVOX_HOST)
+ollama = OllamaClient(host=OLLAMA_HOST)
 
 
 @bot.event
 async def on_ready():
-    await setup_yomiage(bot, voicevox, DEFAULT_SPEAKER_ID)
+    await setup_yomiage(bot, voicevox, ollama, DEFAULT_SPEAKER_ID)
     for guild in bot.guilds:
         bot.tree.copy_global_to(guild=guild)
         await bot.tree.sync(guild=guild)

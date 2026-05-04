@@ -13,4 +13,12 @@ services:
       - .env
     environment:
       - VOICEVOX_HOST=http://voicevox-engine:50021
+      - OLLAMA_HOST=http://ollama:11434
+    networks:
+      - default
+      - llm-network
     restart: unless-stopped
+
+networks:
+  llm-network:
+    external: true
