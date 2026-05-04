@@ -30,6 +30,7 @@ ollama = OllamaClient(host=OLLAMA_HOST)
 
 @bot.event
 async def on_ready():
+    await ollama.warmup()
     await setup_yomiage(bot, voicevox, ollama, DEFAULT_SPEAKER_ID)
     for guild in bot.guilds:
         bot.tree.copy_global_to(guild=guild)

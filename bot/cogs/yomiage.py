@@ -160,15 +160,21 @@ class YomiageCog(commands.Cog):
                 if len(styles) == 1:
                     return styles[0]["id"]
 
-                style_names = [st["name"] for st in styles]
-                inferred = await self.ollama.infer_style(text, style_names)
+                non_normal = [st["name"] for st in styles if st["name"] != "ノーマル"]
+                if not non_normal:
+                    return styles[0]["id"]
+
+                inferred = await self.ollama.infer_style(text, non_normal)
                 if inferred:
                     sid = self._find_speaker_id(speakers, voice_name, inferred)
                     if sid is not None:
+                        logger.info("Auto style: %s -> %s (id=%d) text=%r", voice_name, inferred, sid, text)
                         return sid
 
                 # Fallback
-                return self._fallback_speaker_id(speakers, voice_name) or self.default_speaker
+                fallback = self._fallback_speaker_id(speakers, voice_name) or self.default_speaker
+                logger.info("Auto style fallback: %s -> id=%d text=%r", voice_name, fallback, text)
+                return fallback
 
         return self.default_speaker
 
