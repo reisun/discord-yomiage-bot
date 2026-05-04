@@ -3,15 +3,19 @@ import logging
 import os
 import random
 import re
+from dataclasses import dataclass, field
 
 import aiohttp
 
 logger = logging.getLogger(__name__)
 
 _TIMEOUT = aiohttp.ClientTimeout(total=2)
+_KEEP_ALIVE = "10m"
+_KEEPALIVE_INTERVAL = 4 * 60
+_NUMBER_RE = re.compile(r"\d+")
 
 _PROMPT_TEMPLATE = (
-    "/no_think\n"
+    "{prefix}"
     "Classify the emotion of the following Japanese text.\n"
     "Reply with ONLY the number. Do not add any other text.\n\n"
     "{choices}\n\n"
@@ -19,11 +23,36 @@ _PROMPT_TEMPLATE = (
     "Number:"
 )
 
-_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
-_KEEP_ALIVE = "10m"
-_KEEPALIVE_INTERVAL = 4 * 60
 
-_NUMBER_RE = re.compile(r"\d+")
+@dataclass(frozen=True)
+class ModelConfig:
+    num_predict: int = 4
+    prompt_prefix: str = ""
+    extra_params: dict = field(default_factory=dict)
+
+
+_MODEL_CONFIGS: dict[str, ModelConfig] = {
+    "llama3.2": ModelConfig(
+        prompt_prefix="/no_think\n",
+    ),
+    "llama3.1": ModelConfig(
+        num_predict=8,
+    ),
+    "qwen3": ModelConfig(
+        extra_params={"think": False},
+    ),
+}
+
+
+def _get_model_config(model_name: str) -> ModelConfig:
+    for prefix, config in _MODEL_CONFIGS.items():
+        if model_name.startswith(prefix):
+            return config
+    return ModelConfig()
+
+
+_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3.5:2b")
+_CONFIG = _get_model_config(_MODEL)
 
 _STYLE_TO_ENGLISH: dict[str, str] = {
     "あまあま": "sweet / affectionate / flirting",
@@ -83,10 +112,7 @@ _STYLE_TO_ENGLISH: dict[str, str] = {
 
 
 def _style_label(style_name: str) -> str:
-    eng = _STYLE_TO_ENGLISH.get(style_name)
-    if eng:
-        return eng
-    return style_name
+    return _STYLE_TO_ENGLISH.get(style_name, style_name)
 
 
 class OllamaClient:
@@ -105,11 +131,11 @@ class OllamaClient:
             session = await self._get_session()
             async with session.post(
                 f"{self.host}/api/generate",
-                json={"model": _MODEL, "prompt": "hi", "stream": False, "keep_alive": _KEEP_ALIVE},
-                timeout=aiohttp.ClientTimeout(total=30),
+                json={"model": _MODEL, "prompt": "hi", "stream": False, "keep_alive": _KEEP_ALIVE, **_CONFIG.extra_params},
+                timeout=aiohttp.ClientTimeout(total=120),
             ) as resp:
                 resp.raise_for_status()
-            logger.info("Ollama warmup complete (model=%s)", _MODEL)
+            logger.info("Ollama warmup complete (model=%s, config=%s)", _MODEL, _CONFIG)
         except Exception:
             logger.warning("Ollama warmup failed", exc_info=True)
         self._keepalive_task = asyncio.create_task(self._keepalive_loop())
@@ -121,13 +147,13 @@ class OllamaClient:
                 session = await self._get_session()
                 async with session.post(
                     f"{self.host}/api/generate",
-                    json={"model": _MODEL, "prompt": "", "stream": False, "keep_alive": _KEEP_ALIVE},
+                    json={"model": _MODEL, "prompt": "", "stream": False, "keep_alive": _KEEP_ALIVE, **_CONFIG.extra_params},
                     timeout=aiohttp.ClientTimeout(total=10),
                 ) as resp:
                     resp.raise_for_status()
-                logger.debug("Ollama keepalive sent")
+                logger.info("Ollama keepalive sent")
             except Exception:
-                logger.debug("Ollama keepalive failed", exc_info=True)
+                logger.warning("Ollama keepalive failed", exc_info=True)
 
     async def close(self):
         if self._keepalive_task:
@@ -145,19 +171,25 @@ class OllamaClient:
         choices = "\n".join(
             f"{i+1}. {_style_label(name)}" for i, name in enumerate(shuffled)
         )
-        prompt = _PROMPT_TEMPLATE.format(choices=choices, text=text)
+        prompt = _PROMPT_TEMPLATE.format(
+            prefix=_CONFIG.prompt_prefix,
+            choices=choices,
+            text=text,
+        )
 
         try:
             session = await self._get_session()
+            payload = {
+                "model": _MODEL,
+                "prompt": prompt,
+                "stream": False,
+                "keep_alive": _KEEP_ALIVE,
+                "options": {"num_predict": _CONFIG.num_predict},
+                **_CONFIG.extra_params,
+            }
             async with session.post(
                 f"{self.host}/api/generate",
-                json={
-                    "model": _MODEL,
-                    "prompt": prompt,
-                    "stream": False,
-                    "keep_alive": _KEEP_ALIVE,
-                    "options": {"num_predict": 4},
-                },
+                json=payload,
             ) as resp:
                 resp.raise_for_status()
                 data = await resp.json()
