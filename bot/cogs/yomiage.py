@@ -9,6 +9,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from bot.llm.ollama import OllamaClient
 from bot.tts.voicevox import VoicevoxClient
 
 logger = logging.getLogger(__name__)
@@ -77,11 +78,21 @@ def _replace_role_mention(guild: discord.Guild | None):
 
 
 class YomiageCog(commands.Cog):
-    def __init__(self, bot: commands.Bot, voicevox: VoicevoxClient, default_speaker: int):
+    def __init__(
+        self,
+        bot: commands.Bot,
+        voicevox: VoicevoxClient,
+        ollama: OllamaClient,
+        default_speaker: int,
+    ):
         self.bot = bot
         self.voicevox = voicevox
+        self.ollama = ollama
         self.default_speaker = default_speaker
-        self._user_speakers: dict[int, dict[int, int]] = {}
+        # guild_id -> user_id -> voice_name
+        self._user_voice: dict[int, dict[int, str]] = {}
+        # guild_id -> user_id -> style_name (None = auto)
+        self._user_style: dict[int, dict[int, str | None]] = {}
         self._queue: asyncio.Queue[tuple[discord.VoiceClient, str, int]] = asyncio.Queue()
         self._player_task: asyncio.Task | None = None
         self._active_channels: dict[int, int] = {}
@@ -92,9 +103,74 @@ class YomiageCog(commands.Cog):
             self._speakers_cache = await self.voicevox.get_speakers()
         return self._speakers_cache
 
-    def _get_speaker(self, guild_id: int, user_id: int) -> int:
-        guild_users = self._user_speakers.get(guild_id, {})
-        return guild_users.get(user_id, self.default_speaker)
+    def _default_voice_name(self, speakers: list[dict]) -> str:
+        """Return the voice name that owns *self.default_speaker*."""
+        for sp in speakers:
+            for st in sp.get("styles", []):
+                if st["id"] == self.default_speaker:
+                    return sp["name"]
+        return speakers[0]["name"] if speakers else ""
+
+    @staticmethod
+    def _find_speaker_id(
+        speakers: list[dict], voice_name: str, style_name: str,
+    ) -> int | None:
+        for sp in speakers:
+            if sp["name"] == voice_name:
+                for st in sp.get("styles", []):
+                    if st["name"] == style_name:
+                        return st["id"]
+        return None
+
+    @staticmethod
+    def _fallback_speaker_id(speakers: list[dict], voice_name: str) -> int | None:
+        """Return the 'normal' style id for *voice_name*, or the first style."""
+        for sp in speakers:
+            if sp["name"] == voice_name:
+                styles = sp.get("styles", [])
+                if not styles:
+                    return None
+                for st in styles:
+                    if st["name"] == "ノーマル":
+                        return st["id"]
+                return styles[0]["id"]
+        return None
+
+    async def _get_speaker(self, guild_id: int, user_id: int, text: str) -> int:
+        speakers = await self._fetch_speakers()
+        if not speakers:
+            return self.default_speaker
+
+        voice_name = self._user_voice.get(guild_id, {}).get(
+            user_id, self._default_voice_name(speakers),
+        )
+        style = self._user_style.get(guild_id, {}).get(user_id)  # None = auto
+
+        # Explicit style
+        if style is not None:
+            sid = self._find_speaker_id(speakers, voice_name, style)
+            if sid is not None:
+                return sid
+            return self.default_speaker
+
+        # Auto style
+        for sp in speakers:
+            if sp["name"] == voice_name:
+                styles = sp.get("styles", [])
+                if len(styles) == 1:
+                    return styles[0]["id"]
+
+                style_names = [st["name"] for st in styles]
+                inferred = await self.ollama.infer_style(text, style_names)
+                if inferred:
+                    sid = self._find_speaker_id(speakers, voice_name, inferred)
+                    if sid is not None:
+                        return sid
+
+                # Fallback
+                return self._fallback_speaker_id(speakers, voice_name) or self.default_speaker
+
+        return self.default_speaker
 
     async def cog_load(self):
         self._player_task = asyncio.create_task(self._player_loop())
@@ -103,6 +179,7 @@ class YomiageCog(commands.Cog):
         if self._player_task:
             self._player_task.cancel()
         await self.voicevox.close()
+        await self.ollama.close()
 
     async def _player_loop(self):
         while True:
@@ -175,7 +252,7 @@ class YomiageCog(commands.Cog):
         await interaction.followup.send("👋 退出しました。")
 
     @app_commands.command(name="yo_voice", description="自分の読み上げボイスを変更します")
-    @app_commands.describe(voice="ボイス名", style="話し方")
+    @app_commands.describe(voice="ボイス名", style="話し方（「自動」でLLMが自動選択）")
     async def yo_voice(self, interaction: discord.Interaction, voice: str, style: str):
         try:
             speakers = await self._fetch_speakers()
@@ -185,12 +262,32 @@ class YomiageCog(commands.Cog):
             )
             return
 
+        # Validate voice name exists
+        voice_found = False
+        for sp in speakers:
+            if sp["name"] == voice:
+                voice_found = True
+                break
+        if not voice_found:
+            await interaction.response.send_message(
+                f"「{voice}」が見つかりませんでした。", ephemeral=True
+            )
+            return
+
+        if style == "自動":
+            self._user_voice.setdefault(interaction.guild_id, {})[interaction.user.id] = voice
+            self._user_style.setdefault(interaction.guild_id, {})[interaction.user.id] = None
+            await interaction.response.send_message(
+                f"🎤 {interaction.user.display_name} のボイスを **{voice}**（自動）に変更しました。"
+            )
+            return
+
         for sp in speakers:
             if sp["name"] == voice:
                 for st in sp.get("styles", []):
                     if st["name"] == style:
-                        guild_users = self._user_speakers.setdefault(interaction.guild_id, {})
-                        guild_users[interaction.user.id] = st["id"]
+                        self._user_voice.setdefault(interaction.guild_id, {})[interaction.user.id] = voice
+                        self._user_style.setdefault(interaction.guild_id, {})[interaction.user.id] = style
                         await interaction.response.send_message(
                             f"🎤 {interaction.user.display_name} のボイスを **{voice}**（{style}）に変更しました。"
                         )
@@ -227,11 +324,11 @@ class YomiageCog(commands.Cog):
         except Exception:
             return []
         voice_value = interaction.namespace.voice
-        styles: list[str] = []
+        styles: list[str] = ["自動"]
         if voice_value:
             for sp in speakers:
                 if sp["name"] == voice_value:
-                    styles = [st["name"] for st in sp.get("styles", [])]
+                    styles += [st["name"] for st in sp.get("styles", [])]
                     break
         else:
             seen: set[str] = set()
@@ -284,7 +381,7 @@ class YomiageCog(commands.Cog):
         if not text:
             return
 
-        speaker_id = self._get_speaker(message.guild.id, message.author.id)
+        speaker_id = await self._get_speaker(message.guild.id, message.author.id, text)
         await self._queue.put((vc, text, speaker_id))
 
     @commands.Cog.listener()
@@ -309,5 +406,10 @@ class YomiageCog(commands.Cog):
             logger.info("Auto-disconnected from %s (no members left)", vc.channel.name)
 
 
-async def setup(bot: commands.Bot, voicevox: VoicevoxClient, default_speaker: int):
-    await bot.add_cog(YomiageCog(bot, voicevox, default_speaker))
+async def setup(
+    bot: commands.Bot,
+    voicevox: VoicevoxClient,
+    ollama: OllamaClient,
+    default_speaker: int,
+):
+    await bot.add_cog(YomiageCog(bot, voicevox, ollama, default_speaker))
