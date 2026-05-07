@@ -117,7 +117,7 @@ def _style_label(style_name: str) -> str:
 
 class OllamaClient:
     def __init__(self, host: str | None = None):
-        self.host = (host or os.environ.get("OLLAMA_HOST", "http://ollama:11434")).rstrip("/")
+        self.host = (host or os.environ.get("OLLAMA_HOST", "http://llm-internal-proxy/llm")).rstrip("/")
         self._session: aiohttp.ClientSession | None = None
         self._keepalive_task: asyncio.Task | None = None
 

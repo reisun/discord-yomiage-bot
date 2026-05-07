@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
 VOICEVOX_HOST = os.environ.get("VOICEVOX_HOST", "http://voicevox-engine:50021")
-OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://ollama:11434")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://llm-internal-proxy/llm")
 DEFAULT_SPEAKER_ID = int(os.environ.get("DEFAULT_SPEAKER_ID", "3"))
 
 intents = discord.Intents.default()
