@@ -1,0 +1,2621 @@
+{
+  "started_at": "2026-10-03T18:14:36.537306+00:00",
+  "fixture_sha256": "e37da4ef89892b319fba1cbebfcffaedb36e1cc016edbad3a3ec53184e5e387b",
+  "seed": 20261003,
+  "repeats": 2,
+  "host": "http://host.docker.internal:11434",
+  "metadata_before": {
+    "version": {
+      "version": "0.35.1"
+    },
+    "tags": {
+      "models": [
+        {
+          "name": "tev1:0.8b",
+          "model": "tev1:0.8b",
+          "modified_at": "2026-10-03T21:13:42.7150855+09:00",
+          "size": 811856202,
+          "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+          "details": {
+            "parent_model": "Tev1-0.8B-Q8_0.gguf",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "752.39M",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 1024
+          },
+          "capabilities": [
+            "decision"
+          ]
+        },
+        {
+          "name": "tev1:4b",
+          "model": "tev1:4b",
+          "modified_at": "2026-10-03T21:13:23.1463181+09:00",
+          "size": 4482415847,
+          "digest": "9b5bb969e46c4b776826d6f2d401e22893205693f172653af6254897255025b8",
+          "details": {
+            "parent_model": "Tev1-4B-Q8_0.gguf",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "4.2B",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "decision"
+          ]
+        },
+        {
+          "name": "qwen3.5:2b",
+          "model": "qwen3.5:2b",
+          "modified_at": "2026-10-03T20:54:02.1965213+09:00",
+          "size": 2741192820,
+          "digest": "324d162be6ca5629ae4517c8710434d0bd2d665bc94dbad46e9af8fbf8a2f0df",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "2.3B",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 2048
+          },
+          "capabilities": [
+            "completion",
+            "vision",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "llama3.2:1b",
+          "model": "llama3.2:1b",
+          "modified_at": "2026-05-04T18:42:39.4706069+09:00",
+          "size": 1321098329,
+          "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "llama",
+            "families": [
+              "llama"
+            ],
+            "parameter_size": "1.2B",
+            "quantization_level": "Q8_0",
+            "context_length": 131072,
+            "embedding_length": 2048
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        },
+        {
+          "name": "qwen3-vl:4b",
+          "model": "qwen3-vl:4b",
+          "modified_at": "2026-05-04T14:28:17.8784699+09:00",
+          "size": 3295636135,
+          "digest": "1343d82ebee38e26a4dd6b0180b915eb91550184e67c505dea97509571c8f683",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen3vl",
+            "families": [
+              "qwen3vl"
+            ],
+            "parameter_size": "4.4B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 262144,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "completion",
+            "vision",
+            "tools",
+            "thinking"
+          ]
+        }
+      ]
+    },
+    "ps": {
+      "models": [
+        {
+          "name": "tev1:0.8b",
+          "model": "tev1:0.8b",
+          "size": 893869096,
+          "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "752.39M",
+            "quantization_level": "Q8_0"
+          },
+          "expires_at": "2026-10-04T03:24:14.2244675+09:00",
+          "size_vram": 893869096,
+          "context_length": 2050
+        }
+      ]
+    }
+  },
+  "targets": [
+    {
+      "model": "tev1:0.8b",
+      "api_mode": "systemone",
+      "warmup_seconds": 0.08201962400016782,
+      "summary": {
+        "count": 96,
+        "agreement_rate": 0.90625,
+        "valid_rate": 1.0,
+        "within_budget_rate": 1.0,
+        "latency_seconds": {
+          "p50": 0.27577958350047993,
+          "p95": 0.33887784800026566,
+          "max": 0.36680301100022916
+        }
+      },
+      "groups": {
+        "emotion": {
+          "count": 48,
+          "agreement_rate": 1.0,
+          "valid_rate": 1.0,
+          "within_budget_rate": 1.0,
+          "latency_seconds": {
+            "p50": 0.24196996499995294,
+            "p95": 0.2845722290003323,
+            "max": 0.2869768849996035
+          }
+        },
+        "zundamon": {
+          "count": 48,
+          "agreement_rate": 0.8125,
+          "valid_rate": 1.0,
+          "within_budget_rate": 1.0,
+          "latency_seconds": {
+            "p50": 0.2905512684992573,
+            "p95": 0.34146020600019256,
+            "max": 0.36680301100022916
+          }
+        }
+      },
+      "labels": {
+        "emotion": {
+          "おどろき": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.22883969800022896,
+              "p95": 0.279550883000411,
+              "max": 0.279550883000411
+            }
+          },
+          "こわがり": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.2649128165003276,
+              "p95": 0.2869768849996035,
+              "max": 0.2869768849996035
+            }
+          },
+          "ノーマル": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.25189199699980236,
+              "p95": 0.27437572599956184,
+              "max": 0.27437572599956184
+            }
+          },
+          "喜び": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.22950989349919837,
+              "p95": 0.2667407450007886,
+              "max": 0.2667407450007886
+            }
+          },
+          "怒り": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.24257648649927432,
+              "p95": 0.27580624999973224,
+              "max": 0.27580624999973224
+            }
+          },
+          "悲しみ": {
+            "count": 8,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.26812914150013967,
+              "p95": 0.277251432000412,
+              "max": 0.277251432000412
+            }
+          }
+        },
+        "zundamon": {
+          "あまあま": {
+            "count": 6,
+            "agreement_rate": 0.8333333333333334,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.31956679799986887,
+              "p95": 0.36680301100022916,
+              "max": 0.36680301100022916
+            }
+          },
+          "ささやき": {
+            "count": 6,
+            "agreement_rate": 0.6666666666666666,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.3094753955001579,
+              "p95": 0.34146020600019256,
+              "max": 0.34146020600019256
+            }
+          },
+          "なみだめ": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.32930193199990754,
+              "p95": 0.3344342359996517,
+              "max": 0.3344342359996517
+            }
+          },
+          "セクシー": {
+            "count": 6,
+            "agreement_rate": 0.3333333333333333,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.29174328449880704,
+              "p95": 0.33514643299895397,
+              "max": 0.33514643299895397
+            }
+          },
+          "ツンツン": {
+            "count": 6,
+            "agreement_rate": 0.6666666666666666,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.29450866200022574,
+              "p95": 0.3389713409997057,
+              "max": 0.3389713409997057
+            }
+          },
+          "ノーマル": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.27111839999997756,
+              "p95": 0.32550903300034406,
+              "max": 0.32550903300034406
+            }
+          },
+          "ヒソヒソ": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.2924572669999179,
+              "p95": 0.33096076299989363,
+              "max": 0.33096076299989363
+            }
+          },
+          "ヘロヘロ": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.28166066899939324,
+              "p95": 0.34541545100000803,
+              "max": 0.34541545100000803
+            }
+          }
+        }
+      },
+      "metadata_after": {
+        "version": {
+          "version": "0.35.1"
+        },
+        "tags": {
+          "models": [
+            {
+              "name": "tev1:0.8b",
+              "model": "tev1:0.8b",
+              "modified_at": "2026-10-03T21:13:42.7150855+09:00",
+              "size": 811856202,
+              "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+              "details": {
+                "parent_model": "Tev1-0.8B-Q8_0.gguf",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "752.39M",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 1024
+              },
+              "capabilities": [
+                "decision"
+              ]
+            },
+            {
+              "name": "tev1:4b",
+              "model": "tev1:4b",
+              "modified_at": "2026-10-03T21:13:23.1463181+09:00",
+              "size": 4482415847,
+              "digest": "9b5bb969e46c4b776826d6f2d401e22893205693f172653af6254897255025b8",
+              "details": {
+                "parent_model": "Tev1-4B-Q8_0.gguf",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "4.2B",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 2560
+              },
+              "capabilities": [
+                "decision"
+              ]
+            },
+            {
+              "name": "qwen3.5:2b",
+              "model": "qwen3.5:2b",
+              "modified_at": "2026-10-03T20:54:02.1965213+09:00",
+              "size": 2741192820,
+              "digest": "324d162be6ca5629ae4517c8710434d0bd2d665bc94dbad46e9af8fbf8a2f0df",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "2.3B",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 2048
+              },
+              "capabilities": [
+                "completion",
+                "vision",
+                "tools",
+                "thinking"
+              ]
+            },
+            {
+              "name": "llama3.2:1b",
+              "model": "llama3.2:1b",
+              "modified_at": "2026-05-04T18:42:39.4706069+09:00",
+              "size": 1321098329,
+              "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "llama",
+                "families": [
+                  "llama"
+                ],
+                "parameter_size": "1.2B",
+                "quantization_level": "Q8_0",
+                "context_length": 131072,
+                "embedding_length": 2048
+              },
+              "capabilities": [
+                "completion",
+                "tools"
+              ]
+            },
+            {
+              "name": "qwen3-vl:4b",
+              "model": "qwen3-vl:4b",
+              "modified_at": "2026-05-04T14:28:17.8784699+09:00",
+              "size": 3295636135,
+              "digest": "1343d82ebee38e26a4dd6b0180b915eb91550184e67c505dea97509571c8f683",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen3vl",
+                "families": [
+                  "qwen3vl"
+                ],
+                "parameter_size": "4.4B",
+                "quantization_level": "Q4_K_M",
+                "context_length": 262144,
+                "embedding_length": 2560
+              },
+              "capabilities": [
+                "completion",
+                "vision",
+                "tools",
+                "thinking"
+              ]
+            }
+          ]
+        },
+        "ps": {
+          "models": [
+            {
+              "name": "tev1:0.8b",
+              "model": "tev1:0.8b",
+              "size": 893869096,
+              "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "752.39M",
+                "quantization_level": "Q8_0"
+              },
+              "expires_at": "2026-10-04T03:25:01.0503501+09:00",
+              "size_vram": 893869096,
+              "context_length": 2050
+            }
+          ]
+        }
+      },
+      "rows": [
+        {
+          "id": "zundamon-14",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 1,
+          "text": "静かな夜だね。耳元でそっと、おやすみなさい。",
+          "choices": [
+            "ノーマル",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "なみだめ",
+            "あまあま",
+            "セクシー",
+            "ツンツン",
+            "ささやき"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "ノーマル",
+          "agrees": false,
+          "elapsed_seconds": 0.34146020600019256
+        },
+        {
+          "id": "zundamon-23",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "みんなの優しさが嬉しくて、涙が出そう。でもまだこらえてる。",
+          "choices": [
+            "ささやき",
+            "ノーマル",
+            "セクシー",
+            "なみだめ",
+            "ツンツン",
+            "あまあま",
+            "ヒソヒソ",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.33364663099928293
+        },
+        {
+          "id": "emotion-12",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 1,
+          "text": "努力したのに夢がかなわなくて、悲しくてたまらない。",
+          "choices": [
+            "こわがり",
+            "怒り",
+            "悲しみ",
+            "おどろき",
+            "ノーマル",
+            "喜び"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.27492858199912007
+        },
+        {
+          "id": "emotion-24",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 1,
+          "text": "あの大きな犬がうなっている。怖くて近づけない。",
+          "choices": [
+            "悲しみ",
+            "こわがり",
+            "ノーマル",
+            "怒り",
+            "喜び",
+            "おどろき"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.28167692799979704
+        },
+        {
+          "id": "zundamon-06",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 1,
+          "text": "あなたのそばにいると幸せ。いっぱい甘えさせてね。",
+          "choices": [
+            "セクシー",
+            "ささやき",
+            "ツンツン",
+            "なみだめ",
+            "ヘロヘロ",
+            "あまあま",
+            "ヒソヒソ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.3251316229998338
+        },
+        {
+          "id": "emotion-15",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 1,
+          "text": "約束を何度も破るな！本当に怒っている！",
+          "choices": [
+            "喜び",
+            "こわがり",
+            "悲しみ",
+            "おどろき",
+            "怒り",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.27580624999973224
+        },
+        {
+          "id": "zundamon-12",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 1,
+          "text": "ねえ、私の魅力から目をそらさないで。今夜は帰したくないな。",
+          "choices": [
+            "あまあま",
+            "ヘロヘロ",
+            "なみだめ",
+            "ノーマル",
+            "ツンツン",
+            "セクシー",
+            "ささやき",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "あまあま",
+          "agrees": false,
+          "elapsed_seconds": 0.33514643299895397
+        },
+        {
+          "id": "emotion-14",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 1,
+          "text": "嘘をついてだましたなんて許せない！腹が立つ！",
+          "choices": [
+            "こわがり",
+            "おどろき",
+            "怒り",
+            "喜び",
+            "ノーマル",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.26921551399937016
+        },
+        {
+          "id": "emotion-13",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 1,
+          "text": "何度言えば分かるんだ！勝手に人の物を壊すな！",
+          "choices": [
+            "ノーマル",
+            "こわがり",
+            "悲しみ",
+            "おどろき",
+            "喜び",
+            "怒り"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.26303235399973346
+        },
+        {
+          "id": "emotion-09",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 1,
+          "text": "大切な友達とお別れして、寂しくて悲しい。",
+          "choices": [
+            "こわがり",
+            "喜び",
+            "おどろき",
+            "悲しみ",
+            "ノーマル",
+            "怒り"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.2669650799998635
+        },
+        {
+          "id": "emotion-03",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "駅から会場までは徒歩十分です。",
+          "choices": [
+            "喜び",
+            "悲しみ",
+            "怒り",
+            "ノーマル",
+            "こわがり",
+            "おどろき"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.24476527600018017
+        },
+        {
+          "id": "zundamon-18",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 1,
+          "text": "他の人には聞かれたくないんだけど、あの噂の続き、知ってる？",
+          "choices": [
+            "なみだめ",
+            "ツンツン",
+            "ノーマル",
+            "ヒソヒソ",
+            "セクシー",
+            "ささやき",
+            "ヘロヘロ",
+            "あまあま"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.29546077300074103
+        },
+        {
+          "id": "zundamon-22",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "卒業のお祝いの言葉を聞いて、感動で目に涙がたまってる。",
+          "choices": [
+            "あまあま",
+            "なみだめ",
+            "ノーマル",
+            "ささやき",
+            "ツンツン",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "セクシー"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.27953597299892863
+        },
+        {
+          "id": "emotion-06",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 1,
+          "text": "ありがとう！最高の誕生日プレゼントだよ！",
+          "choices": [
+            "怒り",
+            "こわがり",
+            "ノーマル",
+            "おどろき",
+            "悲しみ",
+            "喜び"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.22559135099982086
+        },
+        {
+          "id": "zundamon-02",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "この書類は三ページあります。",
+          "choices": [
+            "なみだめ",
+            "ささやき",
+            "あまあま",
+            "ヘロヘロ",
+            "セクシー",
+            "ヒソヒソ",
+            "ノーマル",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2703425649997371
+        },
+        {
+          "id": "emotion-11",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 1,
+          "text": "愛犬が亡くなって、胸が痛くて悲しい。",
+          "choices": [
+            "喜び",
+            "怒り",
+            "こわがり",
+            "悲しみ",
+            "おどろき",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.23057494000022416
+        },
+        {
+          "id": "zundamon-20",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 1,
+          "text": "十時間も歩いて、足がふらふら。もう力が出ない。",
+          "choices": [
+            "ヘロヘロ",
+            "セクシー",
+            "ささやき",
+            "ツンツン",
+            "ヒソヒソ",
+            "ノーマル",
+            "あまあま",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.2795081320000463
+        },
+        {
+          "id": "emotion-23",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 1,
+          "text": "知らない人が後ろをついてきて怖い。助けて。",
+          "choices": [
+            "悲しみ",
+            "おどろき",
+            "喜び",
+            "怒り",
+            "こわがり",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.22914885399950435
+        },
+        {
+          "id": "zundamon-04",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 1,
+          "text": "大好きだよ。ずっとあなたに甘えていたいな。",
+          "choices": [
+            "ノーマル",
+            "ささやき",
+            "ツンツン",
+            "あまあま",
+            "なみだめ",
+            "ヒソヒソ",
+            "セクシー",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.27973384100005205
+        },
+        {
+          "id": "emotion-16",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 1,
+          "text": "人を侮辱するのはやめろ！ふざけるな！",
+          "choices": [
+            "怒り",
+            "悲しみ",
+            "喜び",
+            "おどろき",
+            "ノーマル",
+            "こわがり"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.24597831899882294
+        },
+        {
+          "id": "emotion-18",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 1,
+          "text": "うわっ！急に大きな音がして驚いた！",
+          "choices": [
+            "悲しみ",
+            "ノーマル",
+            "喜び",
+            "おどろき",
+            "怒り",
+            "こわがり"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.22730514999966545
+        },
+        {
+          "id": "zundamon-19",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 1,
+          "text": "徹夜続きで、もう体が動かない。へとへとだよ。",
+          "choices": [
+            "ささやき",
+            "ヒソヒソ",
+            "あまあま",
+            "セクシー",
+            "ノーマル",
+            "なみだめ",
+            "ツンツン",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.2807118749988149
+        },
+        {
+          "id": "zundamon-21",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 1,
+          "text": "疲れ切って声を出す元気もない。もう寝かせて。",
+          "choices": [
+            "ノーマル",
+            "ヒソヒソ",
+            "なみだめ",
+            "ツンツン",
+            "ささやき",
+            "セクシー",
+            "あまあま",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.2696602050000365
+        },
+        {
+          "id": "zundamon-11",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 1,
+          "text": "そんなに見つめられたら、誘惑したくなっちゃう。",
+          "choices": [
+            "ツンツン",
+            "ヒソヒソ",
+            "ささやき",
+            "あまあま",
+            "セクシー",
+            "ヘロヘロ",
+            "なみだめ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "セクシー",
+          "agrees": true,
+          "elapsed_seconds": 0.2821306789992377
+        },
+        {
+          "id": "emotion-17",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 1,
+          "text": "えっ！？こんなところで君に会うなんてびっくり！",
+          "choices": [
+            "怒り",
+            "こわがり",
+            "悲しみ",
+            "喜び",
+            "ノーマル",
+            "おどろき"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.2275177329993312
+        },
+        {
+          "id": "zundamon-13",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 1,
+          "text": "隣で赤ちゃんが眠っているから、小さな声でおやすみって伝えるね。",
+          "choices": [
+            "ツンツン",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "セクシー",
+            "ささやき",
+            "なみだめ",
+            "ノーマル",
+            "あまあま"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "ささやき",
+          "agrees": true,
+          "elapsed_seconds": 0.2864884919999895
+        },
+        {
+          "id": "zundamon-03",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "買い物リストに牛乳を追加しました。",
+          "choices": [
+            "ツンツン",
+            "なみだめ",
+            "セクシー",
+            "ノーマル",
+            "あまあま",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "ささやき"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.28013241199914773
+        },
+        {
+          "id": "emotion-05",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 1,
+          "text": "やった！試験に合格した！本当に嬉しい！",
+          "choices": [
+            "こわがり",
+            "喜び",
+            "おどろき",
+            "悲しみ",
+            "ノーマル",
+            "怒り"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.22866984099891852
+        },
+        {
+          "id": "zundamon-09",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "ふん、あなたなんか知らない。勝手にすれば？",
+          "choices": [
+            "ヘロヘロ",
+            "なみだめ",
+            "ノーマル",
+            "あまあま",
+            "ツンツン",
+            "ヒソヒソ",
+            "ささやき",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.2757428880013322
+        },
+        {
+          "id": "zundamon-05",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 1,
+          "text": "ねえ、もう少しだけぎゅっとして。あなたが大好き。",
+          "choices": [
+            "ささやき",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "あまあま",
+            "ノーマル",
+            "セクシー",
+            "なみだめ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.36680301100022916
+        },
+        {
+          "id": "emotion-21",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 1,
+          "text": "暗い廊下で足音がする。怖くて一人では進めない。",
+          "choices": [
+            "おどろき",
+            "怒り",
+            "ノーマル",
+            "悲しみ",
+            "喜び",
+            "こわがり"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.2869768849996035
+        },
+        {
+          "id": "emotion-08",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 1,
+          "text": "ずっと欲しかったものが届いた！幸せ！",
+          "choices": [
+            "おどろき",
+            "ノーマル",
+            "怒り",
+            "こわがり",
+            "喜び",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.2664180820011097
+        },
+        {
+          "id": "zundamon-15",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 1,
+          "text": "大きな声を出さずに、そっとあなたの耳元でありがとう。",
+          "choices": [
+            "セクシー",
+            "なみだめ",
+            "ささやき",
+            "あまあま",
+            "ノーマル",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "ささやき",
+          "agrees": true,
+          "elapsed_seconds": 0.33887784800026566
+        },
+        {
+          "id": "zundamon-07",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "べ、別にあなたのために待ってたわけじゃないんだから！",
+          "choices": [
+            "なみだめ",
+            "セクシー",
+            "あまあま",
+            "ささやき",
+            "ヘロヘロ",
+            "ツンツン",
+            "ヒソヒソ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.308180142999845
+        },
+        {
+          "id": "zundamon-24",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "別れの挨拶をしながら、泣かないように必死で涙をこらえている。",
+          "choices": [
+            "セクシー",
+            "ヒソヒソ",
+            "あまあま",
+            "ツンツン",
+            "ヘロヘロ",
+            "なみだめ",
+            "ノーマル",
+            "ささやき"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.32538538799963135
+        },
+        {
+          "id": "emotion-04",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "今日の参加者は五人です。",
+          "choices": [
+            "悲しみ",
+            "怒り",
+            "喜び",
+            "おどろき",
+            "ノーマル",
+            "こわがり"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2684619389983709
+        },
+        {
+          "id": "emotion-20",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 1,
+          "text": "ええっ！昨日までなかった建物が突然現れた！？",
+          "choices": [
+            "こわがり",
+            "悲しみ",
+            "ノーマル",
+            "怒り",
+            "おどろき",
+            "喜び"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.279550883000411
+        },
+        {
+          "id": "zundamon-17",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 1,
+          "text": "しっ、先生には内緒。みんなでこっそりサプライズを仕掛けよう。",
+          "choices": [
+            "ヒソヒソ",
+            "ツンツン",
+            "セクシー",
+            "ささやき",
+            "なみだめ",
+            "あまあま",
+            "ノーマル",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.33032819100117194
+        },
+        {
+          "id": "zundamon-01",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "明日の集合時間は午前九時です。",
+          "choices": [
+            "ツンツン",
+            "なみだめ",
+            "ヘロヘロ",
+            "ささやき",
+            "あまあま",
+            "ヒソヒソ",
+            "ノーマル",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.32550903300034406
+        },
+        {
+          "id": "emotion-07",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 1,
+          "text": "優勝できた！みんなと喜びを分かち合いたい！",
+          "choices": [
+            "悲しみ",
+            "こわがり",
+            "怒り",
+            "喜び",
+            "ノーマル",
+            "おどろき"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.26453945400135126
+        },
+        {
+          "id": "zundamon-10",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 1,
+          "text": "今夜は二人だけ。もっと近くで、私の声を聞いて。",
+          "choices": [
+            "あまあま",
+            "ノーマル",
+            "ささやき",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "ツンツン",
+            "セクシー",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "あまあま",
+          "agrees": false,
+          "elapsed_seconds": 0.3283688539995637
+        },
+        {
+          "id": "emotion-19",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 1,
+          "text": "まさか一等が当たるなんて！信じられない！",
+          "choices": [
+            "ノーマル",
+            "こわがり",
+            "怒り",
+            "おどろき",
+            "喜び",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.2669752560013876
+        },
+        {
+          "id": "zundamon-08",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "勘違いしないでよね。手伝ったのはたまたまなんだから。",
+          "choices": [
+            "なみだめ",
+            "ささやき",
+            "あまあま",
+            "ツンツン",
+            "ノーマル",
+            "ヒソヒソ",
+            "セクシー",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ノーマル",
+          "agrees": false,
+          "elapsed_seconds": 0.3307828069991956
+        },
+        {
+          "id": "emotion-10",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 1,
+          "text": "楽しみにしていた旅行が中止になって、落ち込んでいる。",
+          "choices": [
+            "喜び",
+            "ノーマル",
+            "怒り",
+            "こわがり",
+            "おどろき",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.277251432000412
+        },
+        {
+          "id": "emotion-22",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 1,
+          "text": "雷が近くに落ちそうで怖い。誰かそばにいて。",
+          "choices": [
+            "喜び",
+            "おどろき",
+            "怒り",
+            "こわがり",
+            "悲しみ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.2845722290003323
+        },
+        {
+          "id": "emotion-01",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "会議は明日の午後三時からです。",
+          "choices": [
+            "ノーマル",
+            "こわがり",
+            "喜び",
+            "おどろき",
+            "怒り",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2625958629996603
+        },
+        {
+          "id": "zundamon-16",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 1,
+          "text": "ここだけの話、あの二人、こっそり付き合ってるらしいよ。誰にも言わないでね。",
+          "choices": [
+            "ノーマル",
+            "なみだめ",
+            "ささやき",
+            "セクシー",
+            "あまあま",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.2894537609990948
+        },
+        {
+          "id": "emotion-02",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "ファイルを共有フォルダーに保存しました。",
+          "choices": [
+            "悲しみ",
+            "ノーマル",
+            "おどろき",
+            "喜び",
+            "こわがり",
+            "怒り"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.22737252699880628
+        },
+        {
+          "id": "emotion-16",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 2,
+          "text": "人を侮辱するのはやめろ！ふざけるな！",
+          "choices": [
+            "おどろき",
+            "ノーマル",
+            "喜び",
+            "怒り",
+            "こわがり",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.2391746539997257
+        },
+        {
+          "id": "emotion-20",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 2,
+          "text": "ええっ！昨日までなかった建物が突然現れた！？",
+          "choices": [
+            "悲しみ",
+            "こわがり",
+            "おどろき",
+            "喜び",
+            "怒り",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.22843449100037105
+        },
+        {
+          "id": "zundamon-03",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "買い物リストに牛乳を追加しました。",
+          "choices": [
+            "ささやき",
+            "ツンツン",
+            "ヘロヘロ",
+            "セクシー",
+            "ノーマル",
+            "なみだめ",
+            "あまあま",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2694904419986415
+        },
+        {
+          "id": "zundamon-10",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 2,
+          "text": "今夜は二人だけ。もっと近くで、私の声を聞いて。",
+          "choices": [
+            "ささやき",
+            "ノーマル",
+            "セクシー",
+            "あまあま",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "なみだめ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.2791639450006187
+        },
+        {
+          "id": "emotion-09",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 2,
+          "text": "大切な友達とお別れして、寂しくて悲しい。",
+          "choices": [
+            "怒り",
+            "こわがり",
+            "喜び",
+            "おどろき",
+            "悲しみ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.23290482699849235
+        },
+        {
+          "id": "zundamon-18",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 2,
+          "text": "他の人には聞かれたくないんだけど、あの噂の続き、知ってる？",
+          "choices": [
+            "ヘロヘロ",
+            "ツンツン",
+            "ささやき",
+            "あまあま",
+            "ノーマル",
+            "なみだめ",
+            "ヒソヒソ",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.28466955099975166
+        },
+        {
+          "id": "emotion-14",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 2,
+          "text": "嘘をついてだましたなんて許せない！腹が立つ！",
+          "choices": [
+            "怒り",
+            "おどろき",
+            "こわがり",
+            "悲しみ",
+            "ノーマル",
+            "喜び"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.22567619500114233
+        },
+        {
+          "id": "zundamon-14",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 2,
+          "text": "静かな夜だね。耳元でそっと、おやすみなさい。",
+          "choices": [
+            "セクシー",
+            "あまあま",
+            "ノーマル",
+            "ツンツン",
+            "なみだめ",
+            "ヒソヒソ",
+            "ささやき",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "ささやき",
+          "agrees": true,
+          "elapsed_seconds": 0.28698502000042936
+        },
+        {
+          "id": "zundamon-04",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 2,
+          "text": "大好きだよ。ずっとあなたに甘えていたいな。",
+          "choices": [
+            "ノーマル",
+            "あまあま",
+            "ヘロヘロ",
+            "なみだめ",
+            "ヒソヒソ",
+            "ささやき",
+            "ツンツン",
+            "セクシー"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.2757529170012276
+        },
+        {
+          "id": "zundamon-11",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 2,
+          "text": "そんなに見つめられたら、誘惑したくなっちゃう。",
+          "choices": [
+            "あまあま",
+            "ヒソヒソ",
+            "なみだめ",
+            "ヘロヘロ",
+            "ノーマル",
+            "ささやき",
+            "セクシー",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "セクシー",
+          "agrees": true,
+          "elapsed_seconds": 0.2826556219988561
+        },
+        {
+          "id": "emotion-24",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 2,
+          "text": "あの大きな犬がうなっている。怖くて近づけない。",
+          "choices": [
+            "悲しみ",
+            "喜び",
+            "おどろき",
+            "怒り",
+            "ノーマル",
+            "こわがり"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.2284314219996304
+        },
+        {
+          "id": "emotion-13",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 2,
+          "text": "何度言えば分かるんだ！勝手に人の物を壊すな！",
+          "choices": [
+            "おどろき",
+            "悲しみ",
+            "怒り",
+            "こわがり",
+            "ノーマル",
+            "喜び"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.23072423299890943
+        },
+        {
+          "id": "emotion-11",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 2,
+          "text": "愛犬が亡くなって、胸が痛くて悲しい。",
+          "choices": [
+            "喜び",
+            "ノーマル",
+            "悲しみ",
+            "おどろき",
+            "怒り",
+            "こわがり"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.23016014300083043
+        },
+        {
+          "id": "emotion-19",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 2,
+          "text": "まさか一等が当たるなんて！信じられない！",
+          "choices": [
+            "こわがり",
+            "怒り",
+            "悲しみ",
+            "喜び",
+            "おどろき",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.2307648820005852
+        },
+        {
+          "id": "zundamon-17",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 2,
+          "text": "しっ、先生には内緒。みんなでこっそりサプライズを仕掛けよう。",
+          "choices": [
+            "ツンツン",
+            "ヘロヘロ",
+            "ノーマル",
+            "あまあま",
+            "なみだめ",
+            "ヒソヒソ",
+            "ささやき",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.2830612600009772
+        },
+        {
+          "id": "emotion-01",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "会議は明日の午後三時からです。",
+          "choices": [
+            "ノーマル",
+            "喜び",
+            "こわがり",
+            "おどろき",
+            "怒り",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.23010768099993584
+        },
+        {
+          "id": "emotion-17",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 2,
+          "text": "えっ！？こんなところで君に会うなんてびっくり！",
+          "choices": [
+            "こわがり",
+            "ノーマル",
+            "おどろき",
+            "悲しみ",
+            "怒り",
+            "喜び"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.22924490500008687
+        },
+        {
+          "id": "emotion-22",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 2,
+          "text": "雷が近くに落ちそうで怖い。誰かそばにいて。",
+          "choices": [
+            "ノーマル",
+            "こわがり",
+            "怒り",
+            "悲しみ",
+            "喜び",
+            "おどろき"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.24814870500085817
+        },
+        {
+          "id": "zundamon-13",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 2,
+          "text": "隣で赤ちゃんが眠っているから、小さな声でおやすみって伝えるね。",
+          "choices": [
+            "ヒソヒソ",
+            "あまあま",
+            "なみだめ",
+            "ノーマル",
+            "セクシー",
+            "ヘロヘロ",
+            "ささやき",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "ささやき",
+          "agrees": true,
+          "elapsed_seconds": 0.33196577099988644
+        },
+        {
+          "id": "zundamon-24",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "別れの挨拶をしながら、泣かないように必死で涙をこらえている。",
+          "choices": [
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "なみだめ",
+            "ツンツン",
+            "セクシー",
+            "ノーマル",
+            "ささやき",
+            "あまあま"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.3344342359996517
+        },
+        {
+          "id": "emotion-04",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "今日の参加者は五人です。",
+          "choices": [
+            "こわがり",
+            "悲しみ",
+            "喜び",
+            "おどろき",
+            "怒り",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.25901871799942455
+        },
+        {
+          "id": "emotion-08",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 2,
+          "text": "ずっと欲しかったものが届いた！幸せ！",
+          "choices": [
+            "こわがり",
+            "怒り",
+            "喜び",
+            "おどろき",
+            "ノーマル",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.2667407450007886
+        },
+        {
+          "id": "emotion-23",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 2,
+          "text": "知らない人が後ろをついてきて怖い。助けて。",
+          "choices": [
+            "ノーマル",
+            "怒り",
+            "喜び",
+            "こわがり",
+            "悲しみ",
+            "おどろき"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.2861584349993791
+        },
+        {
+          "id": "zundamon-21",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 2,
+          "text": "疲れ切って声を出す元気もない。もう寝かせて。",
+          "choices": [
+            "あまあま",
+            "ヘロヘロ",
+            "ノーマル",
+            "ささやき",
+            "セクシー",
+            "ツンツン",
+            "なみだめ",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.3209751909998886
+        },
+        {
+          "id": "zundamon-20",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 2,
+          "text": "十時間も歩いて、足がふらふら。もう力が出ない。",
+          "choices": [
+            "ヘロヘロ",
+            "ノーマル",
+            "なみだめ",
+            "ヒソヒソ",
+            "ツンツン",
+            "あまあま",
+            "ささやき",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.34541545100000803
+        },
+        {
+          "id": "emotion-12",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 2,
+          "text": "努力したのに夢がかなわなくて、悲しくてたまらない。",
+          "choices": [
+            "怒り",
+            "ノーマル",
+            "喜び",
+            "悲しみ",
+            "おどろき",
+            "こわがり"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.27690566399905947
+        },
+        {
+          "id": "zundamon-22",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "卒業のお祝いの言葉を聞いて、感動で目に涙がたまってる。",
+          "choices": [
+            "あまあま",
+            "ささやき",
+            "なみだめ",
+            "ノーマル",
+            "ヘロヘロ",
+            "セクシー",
+            "ツンツン",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.3332184760001837
+        },
+        {
+          "id": "zundamon-06",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 2,
+          "text": "あなたのそばにいると幸せ。いっぱい甘えさせてね。",
+          "choices": [
+            "ヒソヒソ",
+            "ノーマル",
+            "ヘロヘロ",
+            "あまあま",
+            "ささやき",
+            "セクシー",
+            "なみだめ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.31400197299990396
+        },
+        {
+          "id": "emotion-10",
+          "group": "emotion",
+          "label": "悲しみ",
+          "repeat": 2,
+          "text": "楽しみにしていた旅行が中止になって、落ち込んでいる。",
+          "choices": [
+            "こわがり",
+            "おどろき",
+            "怒り",
+            "ノーマル",
+            "悲しみ",
+            "喜び"
+          ],
+          "acceptable": [
+            "悲しみ"
+          ],
+          "selected": "悲しみ",
+          "agrees": true,
+          "elapsed_seconds": 0.2692932030004158
+        },
+        {
+          "id": "zundamon-08",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "勘違いしないでよね。手伝ったのはたまたまなんだから。",
+          "choices": [
+            "ヘロヘロ",
+            "なみだめ",
+            "ささやき",
+            "ノーマル",
+            "ツンツン",
+            "ヒソヒソ",
+            "あまあま",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ノーマル",
+          "agrees": false,
+          "elapsed_seconds": 0.3389713409997057
+        },
+        {
+          "id": "emotion-03",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "駅から会場までは徒歩十分です。",
+          "choices": [
+            "おどろき",
+            "悲しみ",
+            "こわがり",
+            "怒り",
+            "喜び",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.27437572599956184
+        },
+        {
+          "id": "zundamon-16",
+          "group": "zundamon",
+          "label": "ヒソヒソ",
+          "repeat": 2,
+          "text": "ここだけの話、あの二人、こっそり付き合ってるらしいよ。誰にも言わないでね。",
+          "choices": [
+            "ヒソヒソ",
+            "ささやき",
+            "ヘロヘロ",
+            "セクシー",
+            "ノーマル",
+            "なみだめ",
+            "ツンツン",
+            "あまあま"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ヒソヒソ",
+          "agrees": true,
+          "elapsed_seconds": 0.33096076299989363
+        },
+        {
+          "id": "zundamon-05",
+          "group": "zundamon",
+          "label": "あまあま",
+          "repeat": 2,
+          "text": "ねえ、もう少しだけぎゅっとして。あなたが大好き。",
+          "choices": [
+            "ヒソヒソ",
+            "セクシー",
+            "ノーマル",
+            "なみだめ",
+            "あまあま",
+            "ささやき",
+            "ツンツン",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.3279000950005866
+        },
+        {
+          "id": "zundamon-12",
+          "group": "zundamon",
+          "label": "セクシー",
+          "repeat": 2,
+          "text": "ねえ、私の魅力から目をそらさないで。今夜は帰したくないな。",
+          "choices": [
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "ささやき",
+            "セクシー",
+            "ノーマル",
+            "なみだめ",
+            "ツンツン",
+            "あまあま"
+          ],
+          "acceptable": [
+            "セクシー"
+          ],
+          "selected": "ツンツン",
+          "agrees": false,
+          "elapsed_seconds": 0.300830946998758
+        },
+        {
+          "id": "emotion-06",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 2,
+          "text": "ありがとう！最高の誕生日プレゼントだよ！",
+          "choices": [
+            "悲しみ",
+            "おどろき",
+            "喜び",
+            "ノーマル",
+            "怒り",
+            "こわがり"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.23034994599947822
+        },
+        {
+          "id": "zundamon-15",
+          "group": "zundamon",
+          "label": "ささやき",
+          "repeat": 2,
+          "text": "大きな声を出さずに、そっとあなたの耳元でありがとう。",
+          "choices": [
+            "セクシー",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "ノーマル",
+            "なみだめ",
+            "あまあま",
+            "ささやき",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ささやき"
+          ],
+          "selected": "あまあま",
+          "agrees": false,
+          "elapsed_seconds": 0.2817851990002964
+        },
+        {
+          "id": "zundamon-07",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "べ、別にあなたのために待ってたわけじゃないんだから！",
+          "choices": [
+            "ノーマル",
+            "ヘロヘロ",
+            "なみだめ",
+            "あまあま",
+            "ツンツン",
+            "ささやき",
+            "セクシー",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.2727275630004442
+        },
+        {
+          "id": "emotion-18",
+          "group": "emotion",
+          "label": "おどろき",
+          "repeat": 2,
+          "text": "うわっ！急に大きな音がして驚いた！",
+          "choices": [
+            "怒り",
+            "悲しみ",
+            "ノーマル",
+            "おどろき",
+            "こわがり",
+            "喜び"
+          ],
+          "acceptable": [
+            "おどろき"
+          ],
+          "selected": "おどろき",
+          "agrees": true,
+          "elapsed_seconds": 0.22403254299933906
+        },
+        {
+          "id": "emotion-21",
+          "group": "emotion",
+          "label": "こわがり",
+          "repeat": 2,
+          "text": "暗い廊下で足音がする。怖くて一人では進めない。",
+          "choices": [
+            "怒り",
+            "喜び",
+            "こわがり",
+            "悲しみ",
+            "ノーマル",
+            "おどろき"
+          ],
+          "acceptable": [
+            "こわがり"
+          ],
+          "selected": "こわがり",
+          "agrees": true,
+          "elapsed_seconds": 0.23295681700074056
+        },
+        {
+          "id": "zundamon-19",
+          "group": "zundamon",
+          "label": "ヘロヘロ",
+          "repeat": 2,
+          "text": "徹夜続きで、もう体が動かない。へとへとだよ。",
+          "choices": [
+            "ノーマル",
+            "なみだめ",
+            "ツンツン",
+            "ささやき",
+            "セクシー",
+            "ヒソヒソ",
+            "あまあま",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.2826094629999716
+        },
+        {
+          "id": "emotion-07",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 2,
+          "text": "優勝できた！みんなと喜びを分かち合いたい！",
+          "choices": [
+            "悲しみ",
+            "ノーマル",
+            "怒り",
+            "おどろき",
+            "こわがり",
+            "喜び"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.2269379450008273
+        },
+        {
+          "id": "emotion-02",
+          "group": "emotion",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "ファイルを共有フォルダーに保存しました。",
+          "choices": [
+            "こわがり",
+            "怒り",
+            "喜び",
+            "悲しみ",
+            "おどろき",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.22680017399943608
+        },
+        {
+          "id": "zundamon-01",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "明日の集合時間は午前九時です。",
+          "choices": [
+            "ノーマル",
+            "ヘロヘロ",
+            "あまあま",
+            "ささやき",
+            "セクシー",
+            "ツンツン",
+            "ヒソヒソ",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2654928039992228
+        },
+        {
+          "id": "emotion-05",
+          "group": "emotion",
+          "label": "喜び",
+          "repeat": 2,
+          "text": "やった！試験に合格した！本当に嬉しい！",
+          "choices": [
+            "おどろき",
+            "ノーマル",
+            "こわがり",
+            "怒り",
+            "喜び",
+            "悲しみ"
+          ],
+          "acceptable": [
+            "喜び"
+          ],
+          "selected": "喜び",
+          "agrees": true,
+          "elapsed_seconds": 0.2257828480014723
+        },
+        {
+          "id": "zundamon-23",
+          "group": "zundamon",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "みんなの優しさが嬉しくて、涙が出そう。でもまだこらえてる。",
+          "choices": [
+            "ヒソヒソ",
+            "ささやき",
+            "あまあま",
+            "ヘロヘロ",
+            "ツンツン",
+            "セクシー",
+            "ノーマル",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.29164877599941974
+        },
+        {
+          "id": "zundamon-09",
+          "group": "zundamon",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "ふん、あなたなんか知らない。勝手にすれば？",
+          "choices": [
+            "セクシー",
+            "なみだめ",
+            "ノーマル",
+            "ささやき",
+            "ツンツン",
+            "あまあま",
+            "ヘロヘロ",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.2808371810006065
+        },
+        {
+          "id": "emotion-15",
+          "group": "emotion",
+          "label": "怒り",
+          "repeat": 2,
+          "text": "約束を何度も破るな！本当に怒っている！",
+          "choices": [
+            "怒り",
+            "悲しみ",
+            "ノーマル",
+            "こわがり",
+            "おどろき",
+            "喜び"
+          ],
+          "acceptable": [
+            "怒り"
+          ],
+          "selected": "怒り",
+          "agrees": true,
+          "elapsed_seconds": 0.2320455179997225
+        },
+        {
+          "id": "zundamon-02",
+          "group": "zundamon",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "この書類は三ページあります。",
+          "choices": [
+            "なみだめ",
+            "セクシー",
+            "ヒソヒソ",
+            "ささやき",
+            "ヘロヘロ",
+            "あまあま",
+            "ツンツン",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.27189423500021803
+        }
+      ]
+    }
+  ]
+}

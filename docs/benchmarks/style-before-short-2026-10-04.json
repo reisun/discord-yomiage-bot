@@ -1,0 +1,960 @@
+{
+  "started_at": "2026-10-03T18:13:06.772822+00:00",
+  "fixture_sha256": "0f692714840aa6c0e700bbc5581f5acec38c44cff61b7b98df7b9d53df420c29",
+  "seed": 20261003,
+  "repeats": 2,
+  "host": "http://host.docker.internal:11434",
+  "metadata_before": {
+    "version": {
+      "version": "0.35.1"
+    },
+    "tags": {
+      "models": [
+        {
+          "name": "tev1:0.8b",
+          "model": "tev1:0.8b",
+          "modified_at": "2026-10-03T21:13:42.7150855+09:00",
+          "size": 811856202,
+          "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+          "details": {
+            "parent_model": "Tev1-0.8B-Q8_0.gguf",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "752.39M",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 1024
+          },
+          "capabilities": [
+            "decision"
+          ]
+        },
+        {
+          "name": "tev1:4b",
+          "model": "tev1:4b",
+          "modified_at": "2026-10-03T21:13:23.1463181+09:00",
+          "size": 4482415847,
+          "digest": "9b5bb969e46c4b776826d6f2d401e22893205693f172653af6254897255025b8",
+          "details": {
+            "parent_model": "Tev1-4B-Q8_0.gguf",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "4.2B",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "decision"
+          ]
+        },
+        {
+          "name": "qwen3.5:2b",
+          "model": "qwen3.5:2b",
+          "modified_at": "2026-10-03T20:54:02.1965213+09:00",
+          "size": 2741192820,
+          "digest": "324d162be6ca5629ae4517c8710434d0bd2d665bc94dbad46e9af8fbf8a2f0df",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "2.3B",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 2048
+          },
+          "capabilities": [
+            "completion",
+            "vision",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "llama3.2:1b",
+          "model": "llama3.2:1b",
+          "modified_at": "2026-05-04T18:42:39.4706069+09:00",
+          "size": 1321098329,
+          "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "llama",
+            "families": [
+              "llama"
+            ],
+            "parameter_size": "1.2B",
+            "quantization_level": "Q8_0",
+            "context_length": 131072,
+            "embedding_length": 2048
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        },
+        {
+          "name": "qwen3-vl:4b",
+          "model": "qwen3-vl:4b",
+          "modified_at": "2026-05-04T14:28:17.8784699+09:00",
+          "size": 3295636135,
+          "digest": "1343d82ebee38e26a4dd6b0180b915eb91550184e67c505dea97509571c8f683",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen3vl",
+            "families": [
+              "qwen3vl"
+            ],
+            "parameter_size": "4.4B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 262144,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "completion",
+            "vision",
+            "tools",
+            "thinking"
+          ]
+        }
+      ]
+    },
+    "ps": {
+      "models": [
+        {
+          "name": "tev1:0.8b",
+          "model": "tev1:0.8b",
+          "size": 893869096,
+          "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "752.39M",
+            "quantization_level": "Q8_0"
+          },
+          "expires_at": "2026-10-04T03:19:29.5374355+09:00",
+          "size_vram": 893869096,
+          "context_length": 2050
+        }
+      ]
+    }
+  },
+  "targets": [
+    {
+      "model": "tev1:0.8b",
+      "api_mode": "systemone",
+      "warmup_seconds": 0.05252708500120207,
+      "summary": {
+        "count": 24,
+        "agreement_rate": 0.75,
+        "valid_rate": 1.0,
+        "within_budget_rate": 1.0,
+        "latency_seconds": {
+          "p50": 0.28668704599931516,
+          "p95": 0.2998408740004379,
+          "max": 0.3001644480009418
+        }
+      },
+      "groups": {
+        "short": {
+          "count": 24,
+          "agreement_rate": 0.75,
+          "valid_rate": 1.0,
+          "within_budget_rate": 1.0,
+          "latency_seconds": {
+            "p50": 0.28668704599931516,
+            "p95": 0.2998408740004379,
+            "max": 0.3001644480009418
+          }
+        }
+      },
+      "labels": {
+        "short": {
+          "あまあま": {
+            "count": 2,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.29451298149979266,
+              "p95": 0.2998408740004379,
+              "max": 0.2998408740004379
+            }
+          },
+          "なみだめ": {
+            "count": 6,
+            "agreement_rate": 0.3333333333333333,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.2767155980000098,
+              "p95": 0.29149531399889383,
+              "max": 0.29149531399889383
+            }
+          },
+          "ツンツン": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.2907544974996199,
+              "p95": 0.3001644480009418,
+              "max": 0.3001644480009418
+            }
+          },
+          "ノーマル": {
+            "count": 6,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.28205052049997903,
+              "p95": 0.2899172039997211,
+              "max": 0.2899172039997211
+            }
+          },
+          "ヒソヒソ": {
+            "count": 2,
+            "agreement_rate": 0.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.26267352150080114,
+              "p95": 0.28005677300097886,
+              "max": 0.28005677300097886
+            }
+          },
+          "ヘロヘロ": {
+            "count": 2,
+            "agreement_rate": 1.0,
+            "valid_rate": 1.0,
+            "within_budget_rate": 1.0,
+            "latency_seconds": {
+              "p50": 0.28428997350056306,
+              "p95": 0.2979980070012971,
+              "max": 0.2979980070012971
+            }
+          }
+        }
+      },
+      "metadata_after": {
+        "version": {
+          "version": "0.35.1"
+        },
+        "tags": {
+          "models": [
+            {
+              "name": "tev1:0.8b",
+              "model": "tev1:0.8b",
+              "modified_at": "2026-10-03T21:13:42.7150855+09:00",
+              "size": 811856202,
+              "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+              "details": {
+                "parent_model": "Tev1-0.8B-Q8_0.gguf",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "752.39M",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 1024
+              },
+              "capabilities": [
+                "decision"
+              ]
+            },
+            {
+              "name": "tev1:4b",
+              "model": "tev1:4b",
+              "modified_at": "2026-10-03T21:13:23.1463181+09:00",
+              "size": 4482415847,
+              "digest": "9b5bb969e46c4b776826d6f2d401e22893205693f172653af6254897255025b8",
+              "details": {
+                "parent_model": "Tev1-4B-Q8_0.gguf",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "4.2B",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 2560
+              },
+              "capabilities": [
+                "decision"
+              ]
+            },
+            {
+              "name": "qwen3.5:2b",
+              "model": "qwen3.5:2b",
+              "modified_at": "2026-10-03T20:54:02.1965213+09:00",
+              "size": 2741192820,
+              "digest": "324d162be6ca5629ae4517c8710434d0bd2d665bc94dbad46e9af8fbf8a2f0df",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "2.3B",
+                "quantization_level": "Q8_0",
+                "context_length": 262144,
+                "embedding_length": 2048
+              },
+              "capabilities": [
+                "completion",
+                "vision",
+                "tools",
+                "thinking"
+              ]
+            },
+            {
+              "name": "llama3.2:1b",
+              "model": "llama3.2:1b",
+              "modified_at": "2026-05-04T18:42:39.4706069+09:00",
+              "size": 1321098329,
+              "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "llama",
+                "families": [
+                  "llama"
+                ],
+                "parameter_size": "1.2B",
+                "quantization_level": "Q8_0",
+                "context_length": 131072,
+                "embedding_length": 2048
+              },
+              "capabilities": [
+                "completion",
+                "tools"
+              ]
+            },
+            {
+              "name": "qwen3-vl:4b",
+              "model": "qwen3-vl:4b",
+              "modified_at": "2026-05-04T14:28:17.8784699+09:00",
+              "size": 3295636135,
+              "digest": "1343d82ebee38e26a4dd6b0180b915eb91550184e67c505dea97509571c8f683",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen3vl",
+                "families": [
+                  "qwen3vl"
+                ],
+                "parameter_size": "4.4B",
+                "quantization_level": "Q4_K_M",
+                "context_length": 262144,
+                "embedding_length": 2560
+              },
+              "capabilities": [
+                "completion",
+                "vision",
+                "tools",
+                "thinking"
+              ]
+            }
+          ]
+        },
+        "ps": {
+          "models": [
+            {
+              "name": "tev1:0.8b",
+              "model": "tev1:0.8b",
+              "size": 893869096,
+              "digest": "8d11b3146b7f3f4f4d5e9a64665ab2bdaf8b46e4ec42a5880b60a716ae50e3fb",
+              "details": {
+                "parent_model": "",
+                "format": "gguf",
+                "family": "qwen35",
+                "families": [
+                  "qwen35"
+                ],
+                "parameter_size": "752.39M",
+                "quantization_level": "Q8_0"
+              },
+              "expires_at": "2026-10-04T03:23:10.3683174+09:00",
+              "size_vram": 893869096,
+              "context_length": 2050
+            }
+          ]
+        }
+      },
+      "rows": [
+        {
+          "id": "short-09",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "もう許さないのだ！",
+          "choices": [
+            "あまあま",
+            "ツンツン",
+            "ヒソヒソ",
+            "なみだめ",
+            "セクシー",
+            "ヘロヘロ",
+            "ノーマル",
+            "ささやき"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.2927460679984506
+        },
+        {
+          "id": "short-02",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "ただいまなのだ",
+          "choices": [
+            "ヘロヘロ",
+            "ツンツン",
+            "なみだめ",
+            "セクシー",
+            "ささやき",
+            "あまあま",
+            "ヒソヒソ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.24341509999976552
+        },
+        {
+          "id": "short-05",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "悲しいのだ",
+          "choices": [
+            "なみだめ",
+            "セクシー",
+            "あまあま",
+            "ノーマル",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "ツンツン",
+            "ささやき"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.2595815690001473
+        },
+        {
+          "id": "short-11",
+          "group": "short",
+          "label": "ヘロヘロ",
+          "repeat": 1,
+          "text": "疲れたのだ、もう動けない",
+          "choices": [
+            "あまあま",
+            "ささやき",
+            "ヒソヒソ",
+            "なみだめ",
+            "ヘロヘロ",
+            "セクシー",
+            "ツンツン",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.27058193999982905
+        },
+        {
+          "id": "short-08",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "怒ったぞぉぉ！なのだ！",
+          "choices": [
+            "セクシー",
+            "ノーマル",
+            "あまあま",
+            "ヘロヘロ",
+            "ツンツン",
+            "なみだめ",
+            "ささやき",
+            "ヒソヒソ"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.24949924100110366
+        },
+        {
+          "id": "short-04",
+          "group": "short",
+          "label": "ヒソヒソ",
+          "repeat": 1,
+          "text": "ここだけの話なのだ",
+          "choices": [
+            "ヒソヒソ",
+            "ノーマル",
+            "ヘロヘロ",
+            "あまあま",
+            "セクシー",
+            "なみだめ",
+            "ささやき",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.24529027000062342
+        },
+        {
+          "id": "short-07",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "寂しいのだ",
+          "choices": [
+            "ヒソヒソ",
+            "セクシー",
+            "ツンツン",
+            "なみだめ",
+            "ノーマル",
+            "ヘロヘロ",
+            "あまあま",
+            "ささやき"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "ノーマル",
+          "agrees": false,
+          "elapsed_seconds": 0.23947561499880976
+        },
+        {
+          "id": "short-03",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "会議は明日なのだ",
+          "choices": [
+            "あまあま",
+            "ヘロヘロ",
+            "ささやき",
+            "ヒソヒソ",
+            "なみだめ",
+            "ノーマル",
+            "セクシー",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.24587108900050225
+        },
+        {
+          "id": "short-06",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 1,
+          "text": "僕は捨てられたのだ",
+          "choices": [
+            "ツンツン",
+            "あまあま",
+            "ヒソヒソ",
+            "なみだめ",
+            "ノーマル",
+            "ささやき",
+            "ヘロヘロ",
+            "セクシー"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "ノーマル",
+          "agrees": false,
+          "elapsed_seconds": 0.26590922600007616
+        },
+        {
+          "id": "short-12",
+          "group": "short",
+          "label": "あまあま",
+          "repeat": 1,
+          "text": "大好きなのだ、そばにいてほしい",
+          "choices": [
+            "ノーマル",
+            "ヒソヒソ",
+            "セクシー",
+            "ツンツン",
+            "あまあま",
+            "ヘロヘロ",
+            "ささやき",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.2998408740004379
+        },
+        {
+          "id": "short-10",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 1,
+          "text": "なんでそんなこと言うのだ！腹が立つのだ！",
+          "choices": [
+            "ツンツン",
+            "セクシー",
+            "なみだめ",
+            "ヘロヘロ",
+            "あまあま",
+            "ノーマル",
+            "ヒソヒソ",
+            "ささやき"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.2901837200006412
+        },
+        {
+          "id": "short-01",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 1,
+          "text": "テスト",
+          "choices": [
+            "ツンツン",
+            "ささやき",
+            "ノーマル",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "あまあま",
+            "なみだめ",
+            "セクシー"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.28412513499824854
+        },
+        {
+          "id": "short-04",
+          "group": "short",
+          "label": "ヒソヒソ",
+          "repeat": 2,
+          "text": "ここだけの話なのだ",
+          "choices": [
+            "なみだめ",
+            "ツンツン",
+            "ノーマル",
+            "ヒソヒソ",
+            "セクシー",
+            "ささやき",
+            "ヘロヘロ",
+            "あまあま"
+          ],
+          "acceptable": [
+            "ヒソヒソ"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.28005677300097886
+        },
+        {
+          "id": "short-06",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "僕は捨てられたのだ",
+          "choices": [
+            "あまあま",
+            "なみだめ",
+            "ノーマル",
+            "ささやき",
+            "ツンツン",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "セクシー"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.28993075499965926
+        },
+        {
+          "id": "short-03",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "会議は明日なのだ",
+          "choices": [
+            "ささやき",
+            "セクシー",
+            "ノーマル",
+            "ヒソヒソ",
+            "あまあま",
+            "ヘロヘロ",
+            "なみだめ",
+            "ツンツン"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2858521219986869
+        },
+        {
+          "id": "short-11",
+          "group": "short",
+          "label": "ヘロヘロ",
+          "repeat": 2,
+          "text": "疲れたのだ、もう動けない",
+          "choices": [
+            "セクシー",
+            "ささやき",
+            "ヒソヒソ",
+            "ヘロヘロ",
+            "あまあま",
+            "ツンツン",
+            "ノーマル",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "ヘロヘロ"
+          ],
+          "selected": "ヘロヘロ",
+          "agrees": true,
+          "elapsed_seconds": 0.2979980070012971
+        },
+        {
+          "id": "short-09",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "もう許さないのだ！",
+          "choices": [
+            "ささやき",
+            "ツンツン",
+            "なみだめ",
+            "ヘロヘロ",
+            "セクシー",
+            "ヒソヒソ",
+            "あまあま",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.3001644480009418
+        },
+        {
+          "id": "short-12",
+          "group": "short",
+          "label": "あまあま",
+          "repeat": 2,
+          "text": "大好きなのだ、そばにいてほしい",
+          "choices": [
+            "ツンツン",
+            "ヒソヒソ",
+            "セクシー",
+            "ノーマル",
+            "ヘロヘロ",
+            "なみだめ",
+            "あまあま",
+            "ささやき"
+          ],
+          "acceptable": [
+            "あまあま"
+          ],
+          "selected": "あまあま",
+          "agrees": true,
+          "elapsed_seconds": 0.2891850889991474
+        },
+        {
+          "id": "short-10",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "なんでそんなこと言うのだ！腹が立つのだ！",
+          "choices": [
+            "ツンツン",
+            "ヘロヘロ",
+            "ノーマル",
+            "ささやき",
+            "ヒソヒソ",
+            "セクシー",
+            "あまあま",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.29125851199933095
+        },
+        {
+          "id": "short-07",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "寂しいのだ",
+          "choices": [
+            "ヒソヒソ",
+            "あまあま",
+            "ヘロヘロ",
+            "ツンツン",
+            "セクシー",
+            "なみだめ",
+            "ささやき",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "ささやき",
+          "agrees": false,
+          "elapsed_seconds": 0.29149531399889383
+        },
+        {
+          "id": "short-01",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "テスト",
+          "choices": [
+            "ノーマル",
+            "ヘロヘロ",
+            "ささやき",
+            "セクシー",
+            "あまあま",
+            "ヒソヒソ",
+            "ツンツン",
+            "なみだめ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2799759060017095
+        },
+        {
+          "id": "short-05",
+          "group": "short",
+          "label": "なみだめ",
+          "repeat": 2,
+          "text": "悲しいのだ",
+          "choices": [
+            "なみだめ",
+            "ツンツン",
+            "あまあま",
+            "セクシー",
+            "ささやき",
+            "ヘロヘロ",
+            "ヒソヒソ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "なみだめ"
+          ],
+          "selected": "なみだめ",
+          "agrees": true,
+          "elapsed_seconds": 0.2875219699999434
+        },
+        {
+          "id": "short-02",
+          "group": "short",
+          "label": "ノーマル",
+          "repeat": 2,
+          "text": "ただいまなのだ",
+          "choices": [
+            "ノーマル",
+            "ヒソヒソ",
+            "なみだめ",
+            "ツンツン",
+            "ささやき",
+            "セクシー",
+            "あまあま",
+            "ヘロヘロ"
+          ],
+          "acceptable": [
+            "ノーマル"
+          ],
+          "selected": "ノーマル",
+          "agrees": true,
+          "elapsed_seconds": 0.2899172039997211
+        },
+        {
+          "id": "short-08",
+          "group": "short",
+          "label": "ツンツン",
+          "repeat": 2,
+          "text": "怒ったぞぉぉ！なのだ！",
+          "choices": [
+            "ツンツン",
+            "ヒソヒソ",
+            "ささやき",
+            "あまあま",
+            "セクシー",
+            "ヘロヘロ",
+            "なみだめ",
+            "ノーマル"
+          ],
+          "acceptable": [
+            "ツンツン"
+          ],
+          "selected": "ツンツン",
+          "agrees": true,
+          "elapsed_seconds": 0.29025048299990885
+        }
+      ]
+    }
+  ]
+}
