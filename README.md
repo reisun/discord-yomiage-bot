@@ -13,7 +13,7 @@ Discord テキストチャンネルのメッセージを VOICEVOX で音声合�
 
 bot は Docker Desktop の `http://host.docker.internal:11434` からホスト側の Ollama に直接接続します。`OLLAMA_HOST` を `.env` に設定すると接続先を変更できます。内部プロキシや共有の `llm-network` は不要です。
 
-Ollama の `/api/version` と `/api/tags` に bot コンテナから到達できることを確認してください。Ollama 側は Docker からの接続を受け付ける設定が必要です。自動判定では `/v1/systemone` に「ノーマル」を含むスタイル候補を渡し、候補内の回答だけを採用します。モデル未導入、接続失敗、不正出力、2秒タイムアウト時は通常の読み上げスタイルに戻ります。ユーザーが明示したスタイルは優先します。
+Ollama の `/api/version` と `/api/tags` に bot コンテナから到達できることを確認してください。Ollama 側は Docker からの接続を受け付ける設定が必要です。自動判定では `/v1/systemone` に「ノーマル」を含むスタイル候補を渡し、候補内の回答だけを採用します。モデル未導入、接続失敗、不正出力、0.75秒タイムアウト時は通常の読み上げスタイルに戻ります。ユーザーが明示したスタイルは優先します。
 
 従来の Qwen を使う場合は `OLLAMA_API_MODE=generate` と `OLLAMA_MODEL=qwen3.5:2b` を設定すると `/api/generate` に切り替わります。`OLLAMA_MODEL` 未指定時は、`systemone` では `tev1:0.8b`、`generate` では `qwen3.5:2b` を使います。
 

@@ -106,9 +106,10 @@ class OllamaClientTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(await client.infer_style("例文", ["ノーマル", "喜び"]))
 
     async def test_inference_timeout_falls_back(self):
-        self.delay = 0.1
-        with patch.object(ollama, "_TIMEOUT", aiohttp.ClientTimeout(total=0.02)):
-            self.assertIsNone(await self.client().infer_style("例文", ["ノーマル", "喜び"]))
+        self.delay = 1.0
+        client = self.client()
+        self.assertEqual((await client._get_session()).timeout.total, 0.75)
+        self.assertIsNone(await client.infer_style("例文", ["ノーマル", "喜び"]))
 
     async def test_generate_legacy_number_mapping(self):
         self.response = {"response": "2"}
