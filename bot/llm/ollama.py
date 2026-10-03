@@ -10,7 +10,8 @@ import aiohttp
 
 logger = logging.getLogger(__name__)
 
-_TIMEOUT = aiohttp.ClientTimeout(total=2)
+INFERENCE_TIMEOUT_SECONDS = 0.75
+_TIMEOUT = aiohttp.ClientTimeout(total=INFERENCE_TIMEOUT_SECONDS)
 _KEEP_ALIVE = "10m"
 _KEEPALIVE_INTERVAL = 4 * 60
 _NUMBER_RE = re.compile(r"\d+")

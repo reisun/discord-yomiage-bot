@@ -18,7 +18,7 @@ from unittest.mock import patch
 import aiohttp
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from bot.llm.ollama import OllamaClient
+from bot.llm.ollama import INFERENCE_TIMEOUT_SECONDS, OllamaClient
 
 
 def target(value):
@@ -35,7 +35,7 @@ def summarize(rows):
         "count": count,
         "agreement_rate": sum(row["agrees"] for row in rows) / count if count else None,
         "valid_rate": sum(row["selected"] is not None for row in rows) / count if count else None,
-        "within_budget_rate": sum(row["selected"] is not None and row["elapsed_seconds"] < 2 for row in rows) / count if count else None,
+        "within_budget_rate": sum(row["selected"] is not None and row["elapsed_seconds"] < INFERENCE_TIMEOUT_SECONDS for row in rows) / count if count else None,
         "latency_seconds": {
             "p50": statistics.median(latencies) if count else None,
             "p95": latencies[max(0, math.ceil(count * 0.95) - 1)] if count else None,
@@ -75,6 +75,7 @@ async def run(args):
         "fixture_sha256": hashlib.sha256(fixture_bytes).hexdigest(),
         "seed": args.seed,
         "repeats": args.repeats,
+        "inference_timeout_seconds": INFERENCE_TIMEOUT_SECONDS,
         "host": args.host,
         "metadata_before": await metadata(args.host),
         "targets": [],
