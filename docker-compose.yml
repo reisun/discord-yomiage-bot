@@ -13,12 +13,5 @@ services:
       - .env
     environment:
       - VOICEVOX_HOST=http://voicevox-engine:50021
-      - OLLAMA_HOST=http://llm-internal-proxy/llm
-    networks:
-      - default
-      - llm-network
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
     restart: unless-stopped
-
-networks:
-  llm-network:
-    external: true
